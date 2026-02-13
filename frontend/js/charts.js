@@ -1,4 +1,4 @@
-const token = localStorage.getItem("token");
+//const token = localStorage.getItem("token");
 const API = `${API_BASE_URL}/api/analytics`;
 
 async function fetchAnalytics() {

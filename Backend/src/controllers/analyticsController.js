@@ -1,4 +1,6 @@
 // controllers/analyticsController.js
+const Interview = require("../models/Interview");
+const User = require("../models/User");
 const analyticsService = require('../services/analytics.service');
 
 /**

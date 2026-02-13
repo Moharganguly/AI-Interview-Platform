@@ -10,10 +10,13 @@ const app = express();
 // Middleware
 
 
+const cors = require('cors');
+
 app.use(cors({
-  origin: "https://ai-interview-platform-mu-nine.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  origin: [
+    'https://ai-interview-platform-c8f2.onrender.com',
+    'http://localhost:3000'
+  ],
   credentials: true
 }));
 app.options('*', cors());
