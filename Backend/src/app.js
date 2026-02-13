@@ -12,6 +12,7 @@ const app = express();
 
 app.use(cors({
   origin: [
+    'https://ai-interview-platform-mu-nine.vercel.app',  // ← Add Vercel URL
     'https://ai-interview-platform-c8f2.onrender.com',
     'http://localhost:3000'
   ],
