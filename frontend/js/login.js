@@ -1,21 +1,48 @@
-const API_BASE_URL = "https://ai-interview-platform-c8f2.onrender.com";
+document.addEventListener("DOMContentLoaded", () => {
+  const loginBtn = document.getElementById("loginBtn");
+  if (loginBtn) {
+    loginBtn.addEventListener("click", login);
+  }
+});
 
 async function login() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-  const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-  });
+  if (!email || !password) {
+    alert("Please enter both email and password");
+    return;
+  }
 
-  const data = await res.json();
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    });
 
-  if (data.token) {
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.message || "Login failed");
+      return;
+    }
+
+    // Save token
     localStorage.setItem("token", data.token);
+
+    // Optional: save user info
+    if (data.user) {
+      localStorage.setItem("user", JSON.stringify(data.user));
+    }
+
+    // Redirect
     window.location.href = "dashboard.html";
-  } else {
-    alert(data.message || "Login failed");
+
+  } catch (error) {
+    console.error("Login error:", error);
+    alert("Server not responding. Please try again later.");
   }
 }
