@@ -1,14 +1,17 @@
 async function loadAnalytics() {
   const token = localStorage.getItem("token");
+  const API_BASE = "https://ai-interview-platform-c8f2.onrender.com";
+
 
   const res = await fetch(
-    "http://localhost:5000/api/analytics/overview",
-    {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+  `${API_BASE}/api/analytics/overview`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
     }
-  );
+  }
+);
+
 
   const data = await res.json();
   document.getElementById("output").innerText =
