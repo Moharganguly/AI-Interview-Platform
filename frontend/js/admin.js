@@ -1,4 +1,4 @@
-const API = "https://ai-interview-backend.onrender.com/api";
+const API = "https://ai-interview-platform-c8f2.onrender.com";
 
 
 // Fetch admin statistics
