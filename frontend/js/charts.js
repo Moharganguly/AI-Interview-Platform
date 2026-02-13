@@ -1,5 +1,5 @@
-const AUTH_TOKEN = localStorage.getItem("token");
-const API = "https://ai-interview-platform-c8f2.onrender.com";
+const token = localStorage.getItem("token");
+const API = `${API_BASE_URL}/api/analytics`;
 
 async function fetchAnalytics() {
   const res = await fetch(`${API}/dashboard`, {

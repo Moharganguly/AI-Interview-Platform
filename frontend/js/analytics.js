@@ -1,5 +1,5 @@
-const API_BASE = "https://ai-interview-platform-c8f2.onrender.com";
-// Remove: const token = localStorage.getItem("token");  ← DELETE THIS LINE
+const API_BASE = `${API_BASE_URL}/api/analytics`;
+const token = localStorage.getItem("token");
 
 if (token) {  // token already exists from auth.js
   async function fetchAnalytics() {
