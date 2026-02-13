@@ -1,3 +1,5 @@
+const API_BASE_URL = "https://ai-interview-platform-c8f2.onrender.com";
+
 async function login() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
