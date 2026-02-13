@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="user-nav">
+  <h2>📊 Analytics</h2>
+  <div class="nav-links">
+    <a href="dashboard.html" class="active">My Dashboard</a>
+    <a href="admin-dashboard.html" id="adminLink" style="display: none;">🔐 Admin Panel</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </div>
+</nav>
+
+<div class="dashboard-container">
+  <h1>📊 Interview Analytics Dashboard</h1>
+
+  <!-- OVERVIEW STATS -->
+  <div class="card">
+    <h2>Overview</h2>
+    <p>Total Attempts: <span id="totalAttempts">-</span></p>
+    <p>Average Score: <span id="averageScore">-</span></p>
+    <p>Best Score: <span id="bestScore">-</span></p>
+    <p>Worst Score: <span id="worstScore">-</span></p>
+  </div>
+
+  <!-- CHARTS SECTION -->
+  <div class="card chart-container">
+    <h2>📈 Score Trend</h2>
+    <canvas id="scoreTrendChart"></canvas>
+  </div>
+
+  <div class="card chart-container">
+    <h2>📊 Attempts by Role</h2>
+    <canvas id="roleChart"></canvas>
+  </div>
+
+  <div class="card chart-container">
+    <h2>🎯 Performance Metrics</h2>
+    <canvas id="strengthChart"></canvas>
+  </div>
+
+  <!-- STRENGTHS & WEAKNESSES -->
+  <div class="card">
+    <h2>💪 Strengths</h2>
+    <ul id="strengths"></ul>
+
+    <h2>⚠️ Areas for Improvement</h2>
+    <ul id="weaknesses"></ul>
+  </div>
+
+  <!-- SCORES BY ROLE -->
+  <div class="card">
+    <h2>📚 Scores by Role & Level</h2>
+    <ul id="scoresByRole"></ul>
+  </div>
+</div>
+
+<!-- Include Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Include your scripts -->
+<script src="js/auth.js"></script>
+<script src="js/analytics.js"></script>
+<script src="js/charts.js"></script>
+
+<!-- Show admin link if user is admin -->
+<script>
+  // Check if user is admin and show admin link
+  function checkAdminAccess() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const payload = token.split('.')[1];
+        const decoded = JSON.parse(atob(payload));
+        if (decoded.role === 'admin') {
+          document.getElementById('adminLink').style.display = 'inline-block';
+        }
+      } catch (e) {
+        console.error("Error checking admin access:", e);
+      }
+    }
+  }
+  
+  function logout() {
+    if (confirm("Are you sure you want to logout?")) {
+      localStorage.removeItem("token");
+      window.location.href = "login.html";
+    }
+  }
+  
+  checkAdminAccess();
+</script>
+
+</body>
+</html>
