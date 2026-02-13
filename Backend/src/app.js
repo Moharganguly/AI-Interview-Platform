@@ -1,6 +1,6 @@
 // Express App Setup
 const express = require('express');
-const cors = require('cors');
+const cors = require('cors');  // ← Keep this one
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -8,9 +8,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-
-
-const cors = require('cors');
+// const cors = require('cors');  ← DELETE THIS LINE (line 13)
 
 app.use(cors({
   origin: [
@@ -22,7 +20,6 @@ app.use(cors({
 app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 // Import Routes
 const authRoutes = require('./routes/auth.routes');
