@@ -1,6 +1,5 @@
 async function loadAnalytics() {
   const token = localStorage.getItem("token");
-  const API_BASE = "https://ai-interview-platform-c8f2.onrender.com"; // Your actual backend URL
 
   try {
     const res = await fetch(
