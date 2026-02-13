@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000/api/analytics";
+const API_BASE = "https://ai-interview-backend.onrender.com/api/analytics";
 // Remove: const token = localStorage.getItem("token");  ← DELETE THIS LINE
 
 if (token) {  // token already exists from auth.js

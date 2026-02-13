@@ -1,5 +1,5 @@
 const AUTH_TOKEN = localStorage.getItem("token");
-const API = "http://localhost:5000/api/analytics";
+const API = "https://ai-interview-backend.onrender.com/api/analytics";
 
 async function fetchAnalytics() {
   const res = await fetch(`${API}/dashboard`, {

@@ -1,4 +1,4 @@
-const API = "http://localhost:5000/api";
+const API = "https://ai-interview-backend.onrender.com/api";
 
 
 // Fetch admin statistics
