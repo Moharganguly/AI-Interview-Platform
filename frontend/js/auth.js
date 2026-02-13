@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://ai-interview-backend.onrender.com/api";
+const API_BASE_URL = "https://ai-interview-platform-c8f2.onrender.com";
 
 const token = localStorage.getItem("token");
 
