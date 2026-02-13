@@ -46,6 +46,90 @@ async function fetchAdminStats() {
     showError(error.message);
   }
 }
+function populateUsersTable(users) {
+  const tbody = document.getElementById('usersTableBody');
+
+  if (users.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" class="loading">No users found</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = users.map(user => `
+    <tr>
+      <td>${user.name || 'N/A'}</td>
+      <td>${user.email || 'N/A'}</td>
+      <td><span class="role-badge">${user.role || 'candidate'}</span></td>
+      <td>${user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}</td>
+      <td>
+        <button class="btn-view" onclick="viewUser('${user._id}')">View</button>
+        <button class="btn-delete" onclick="deleteUser('${user._id}', '${user.name}')">Delete</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function populateInterviewsTable(interviews) {
+  const tbody = document.getElementById('interviewsTableBody');
+
+  if (interviews.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" class="loading">No interviews found</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = interviews.map(interview => {
+    const candidateName = interview.user?.name || interview.user?.email || 'Unknown';
+    const status = interview.status || 'pending';
+    const statusClass = `status-${status.replace('-', '')}`;
+
+    return `
+      <tr>
+        <td>${candidateName}</td>
+        <td>${interview.jobRole || interview.role || 'N/A'}</td>
+        <td>${interview.difficulty || interview.level || 'N/A'}</td>
+        <td><strong>${interview.overallScore ?? 'N/A'}</strong></td>
+        <td><span class="status-badge ${statusClass}">${status}</span></td>
+        <td>${interview.createdAt ? new Date(interview.createdAt).toLocaleDateString() : 'N/A'}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function viewUser(userId) {
+  alert(`View user details: ${userId}\n\nThis feature will show detailed user information.`);
+}
+
+async function deleteUser(userId, userName) {
+  if (!confirm(`⚠️ Are you sure you want to delete "${userName}"?`)) {
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/admin/users/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (res.ok) {
+      alert('✅ User deleted successfully');
+      fetchAdminStats();
+    } else {
+      const error = await res.json();
+      alert(`❌ Failed: ${error.message || 'Unknown error'}`);
+    }
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    alert(`❌ Error: ${error.message}`);
+  }
+}
+
+// Load data when page loads
+document.addEventListener('DOMContentLoaded', () => {
+  console.log("Admin dashboard loaded");
+  fetchAdminStats();
+});
 
 function updateStats(users, interviews) {
   document.getElementById("totalUsers").textContent = users.length;
