@@ -1,9 +1,9 @@
 const API_BASE = `${API_BASE_URL}/api/analytics`;
 const token = localStorage.getItem("token");
 
-if (token) {  // token already exists from auth.js
+if (token) {
   async function fetchAnalytics() {
-    const res = await fetch(`${API_BASE}/dashboard`, {
+    const res = await fetch(`${API_BASE}/dashboard`, {  
       headers: {
         Authorization: `Bearer ${token}`
       }
