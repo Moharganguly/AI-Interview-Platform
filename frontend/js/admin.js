@@ -1,4 +1,4 @@
-// Use backend URL from config.js
+
 const API = API_BASE_URL;
 
 // Get token from localStorage
