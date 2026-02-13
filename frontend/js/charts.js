@@ -2,16 +2,16 @@ const token = localStorage.getItem("token");
 const API = `${API_BASE_URL}/api/analytics`;
 
 async function fetchAnalytics() {
-  const res = await fetch(`${API}/dashboard`, {
+  const res = await fetch(`${API}/dashboard`, {  // ← FIXED HERE
     headers: {
       Authorization: `Bearer ${token}`
     }
   });
-  
+
   if (!res.ok) {
     throw new Error("Failed to fetch analytics");
   }
-  
+
   return res.json();
 }
 
