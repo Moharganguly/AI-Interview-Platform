@@ -1,23 +1,37 @@
 // Express App Setup
 const express = require('express');
-const cors = require('cors');  // ← Keep this one
+const cors = require('cors');
 const dotenv = require('dotenv');
 
 dotenv.config();
 
 const app = express();
 
-// Middleware
-// const cors = require('cors');  ← DELETE THIS LINE (line 13)
-
+// Middleware - CORS Configuration
 app.use(cors({
-  origin: [
-    'https://ai-interview-platform-mu-nine.vercel.app',  // ← Add Vercel URL
-    'https://ai-interview-platform-c8f2.onrender.com',
-    'http://localhost:3000'
-  ],
-  credentials: true
+  origin: function(origin, callback) {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+    
+    // Allow all Vercel deployments and localhost
+    const allowedOrigins = [
+      'https://ai-interview-platform-mu-nine.vercel.app',
+      'http://localhost:3000',
+      'http://localhost:5173'
+    ];
+    
+    // Check if origin is in allowed list OR is a Vercel deployment
+    if (allowedOrigins.includes(origin) || origin.includes('vercel.app')) {
+      return callback(null, true);
+    }
+    
+    callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
