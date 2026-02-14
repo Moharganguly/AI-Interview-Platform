@@ -274,11 +274,7 @@ AI-Interview-Platform/
 - Environment variable protection
 - Input validation and sanitization
 
-## 🎨 Screenshots
 
-[Add screenshots of your application here]
-
-## 👥 Team
 
 **Developer**: Mohar Ganguly
 **GitHub**: https://github.com/Moharganguly
