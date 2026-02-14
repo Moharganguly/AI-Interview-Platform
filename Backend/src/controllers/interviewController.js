@@ -120,10 +120,12 @@ exports.submitAnswer = async (req, res) => {
     // Call AI service
     let aiResult;
     try {
-      const aiResponse = await axios.post(
-        "http://127.0.0.1:8000/ai/evaluate",
-        { interviewId, question, answerText }
-      );
+      const AI_SERVICE_URL = process.env.AI_SERVICE_URL || "https://ai-interview-ai-service.onrender.com";
+
+const aiResponse = await axios.post(
+  `${AI_SERVICE_URL}/ai/evaluate`,
+  { interviewId, question, answerText }
+);
       aiResult = aiResponse.data;
     } catch (aiError) {
       console.error("AI Service Error:", aiError.message);
