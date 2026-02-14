@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #331a36 0%, #000000f6 50%, #df9de7 100%);
@@ -15,7 +21,7 @@ body {
   border-radius: 20px;
   box-shadow: 0 15px 35px rgba(37, 32, 32, 0.95);
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
   backdrop-filter: blur(10px);
   animation: slideIn 0.5s ease;
 }
@@ -39,6 +45,7 @@ h1, h2 {
   background-clip: text;
   margin-bottom: 30px;
   font-size: 2rem;
+  font-weight: 700;
 }
 
 .form-group {
@@ -47,10 +54,10 @@ h1, h2 {
 
 label {
   display: block;
-  color: #000000;
+  color: #ffffff;
   font-weight: 600;
   margin-bottom: 8px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 input[type="email"],
@@ -62,8 +69,8 @@ input[type="text"] {
   border-radius: 10px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  box-sizing: border-box;
   background: #fcefd1;
+  font-family: inherit;
 }
 
 input[type="email"]:focus,
@@ -75,11 +82,15 @@ input[type="text"]:focus {
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
+input::placeholder {
+  color: #999;
+}
+
 button {
   width: 100%;
   padding: 14px;
   background: linear-gradient(135deg, #dcabbf 0%, #7000df 100%);
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   border: none;
   border-radius: 10px;
   font-size: 1.1rem;
@@ -88,6 +99,7 @@ button {
   transition: all 0.3s ease;
   margin-top: 10px;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  font-family: inherit;
 }
 
 button:hover {
@@ -99,24 +111,32 @@ button:active {
   transform: translateY(0);
 }
 
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .link-text {
   text-align: center;
   margin-top: 20px;
-  color: #e36161;
+  color: #ffffff;
+  font-size: 0.95rem;
 }
 
 .link-text a {
-  color: #030303;
+  color: #f3db03;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .link-text a:hover {
-  color: #682aa5;
+  color: #ef023e;
   text-decoration: underline;
 }
 
+/* Message styles */
 .error-message {
   background: #fee;
   color: #c33;
@@ -135,4 +155,62 @@ button:active {
   margin-bottom: 15px;
   border-left: 4px solid #3c3;
   display: none;
+}
+
+/* Form switching animation */
+#loginForm, #signupForm {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Loading state for button */
+button.loading {
+  position: relative;
+  color: transparent;
+}
+
+button.loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .login-container {
+    padding: 30px 20px;
+    max-width: 100%;
+  }
+
+  h1, h2 {
+    font-size: 1.6rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 12px;
+  }
 }

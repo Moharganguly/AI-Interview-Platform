@@ -69,6 +69,7 @@
 <script src="js/auth.js"></script>
 <script src="js/analytics.js"></script>
 <script src="js/charts.js"></script>
+<script src="js/reports.js"></script>
 
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -100,6 +101,16 @@
   
   checkAdminAccess();
 </script>
+<!-- Add this button in dashboard.html -->
+<div class="card">
+  <h2>📥 Download Reports</h2>
+  <button onclick="downloadPDFReport()" class="btn-download">
+    Download PDF Report
+  </button>
+  <button onclick="downloadCSVReport()" class="btn-download">
+    Download CSV Report
+  </button>
+</div>
 
 </body>
 </html>
