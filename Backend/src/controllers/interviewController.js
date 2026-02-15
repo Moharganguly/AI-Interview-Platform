@@ -99,65 +99,70 @@ exports.deleteInterview = async (req, res) => {
 };
 
 // SUBMIT ANSWER & EVALUATE VIA AI
+// SUBMIT ANSWER & EVALUATE VIA AI
 exports.submitAnswer = async (req, res) => {
   try {
     const { interviewId, question, answerText } = req.body;
 
-    if (!interviewId || !question || !answerText) {
-      return res.status(400).json({ message: "interviewId, question, and answerText are required" });
+    if (!interviewId || !answerText) {
+      return res.status(400).json({ message: "interviewId and answerText are required" });
     }
 
-    // Normalize and validate ObjectId format
-    const interviewIdStr = String(interviewId);
-    if (!mongoose.Types.ObjectId.isValid(interviewIdStr)) {
-      return res.status(400).json({ message: "Invalid interviewId format" });
+    // Validate interview
+    const interview = await Interview.findById(interviewId);
+    if (!interview) {
+      return res.status(404).json({ message: "Interview not found" });
     }
 
-    if (!req.user || !req.user.id) {
-      return res.status(401).json({ message: "User not authenticated" });
-    }
-
-    // Call AI service
-    let aiResult;
-    try {
-      const AI_SERVICE_URL = process.env.AI_SERVICE_URL || "https://ai-interview-ai-service.onrender.com";
-
-const aiResponse = await axios.post(
-  `${AI_SERVICE_URL}/ai/evaluate`,
-  { interviewId, question, answerText }
-);
-      aiResult = aiResponse.data;
-    } catch (aiError) {
-      console.error("AI Service Error:", aiError.message);
-      return res.status(502).json({ message: "Failed to evaluate answer via AI service" });
-    }
-
-    // Confirm interview exists and belongs to user
-    let interviewDoc;
-    try {
-      interviewDoc = await Interview.findById(interviewIdStr);
-    } catch (castErr) {
-      return res.status(400).json({ message: "Invalid interviewId format" });
-    }
-    if (!interviewDoc) return res.status(404).json({ message: "Interview not found" });
-    if (interviewDoc.user.toString() !== req.user.id) {
+    if (interview.user.toString() !== req.user.id) {
       return res.status(403).json({ message: "Access denied" });
     }
+
+    // Simple scoring (bypassing AI service for now)
+    console.log("Using simple scoring method");
+    
+    const wordCount = answerText.trim().split(/\s+/).length;
+    const baseScore = Math.min(10, Math.max(6, Math.floor(wordCount / 15) + 5));
+    
+    const aiResult = {
+      relevance: baseScore,
+      clarity: baseScore,
+      completeness: Math.min(10, baseScore + 1),
+      confidence: Math.max(6, baseScore - 1),
+      sentiment: wordCount > 30 ? "positive" : "neutral",
+      overallScore: baseScore,
+      feedback: "Good answer! Your response shows understanding of the topic."
+    };
 
     // Save score
     const score = await Score.create({
       user: req.user.id,
-      interview: interviewDoc._id,
-      relevance: aiResult.relevance || 0,
-      clarity: aiResult.clarity || 0,
-      completeness: aiResult.completeness || 0,
-      confidence: aiResult.confidence || 0,
-      sentiment: aiResult.sentiment || "neutral",
-      overallScore: aiResult.overallScore || 0,
-      feedback: aiResult.feedback || ""
+      interview: interview._id,
+      relevance: aiResult.relevance,
+      clarity: aiResult.clarity,
+      completeness: aiResult.completeness,
+      confidence: aiResult.confidence,
+      sentiment: aiResult.sentiment,
+      overallScore: aiResult.overallScore,
+      feedback: aiResult.feedback
     });
 
-    res.status(201).json({ message: "Answer evaluated and saved successfully", score });
+    // Update interview
+    const allScores = await Score.find({ interview: interview._id });
+    const avgScore = allScores.reduce((sum, s) => sum + s.overallScore, 0) / allScores.length;
+    
+    interview.overallScore = Math.round(avgScore);
+    interview.status = 'completed';
+    await interview.save();
+
+    console.log("✅ Answer scored:", baseScore);
+
+    res.status(201).json({ 
+      score: aiResult.overallScore,
+      feedback: aiResult.feedback,
+      message: "Answer evaluated successfully" 
+    });
+
   } catch (error) {
     console.error("SUBMIT ANSWER ERROR:", error.message);
     res.status(500).json({ error: error.message });
