@@ -3,57 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Interview Platform</title>
-  <meta http-equiv="refresh" content="0; url=login.html">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #331a36 0%, #000000f6 50%, #df9de7 100%);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0;
-    }
-    .redirect-message {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-    h1 {
-      color: #667eea;
-      margin-bottom: 20px;
-    }
-    .spinner {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #667eea;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 20px auto;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
+  <title>AI Interview Platform - Ace Your Next Interview</title>
+  <meta name="description" content="Practice with AI-powered mock interviews, get instant feedback, and track your progress. Prepare for your dream job with our intelligent interview platform.">
+  <link rel="stylesheet" href="css/landing.css">
 </head>
 <body>
-  <div class="redirect-message">
-    <h1>🎯 AI Interview Platform</h1>
-    <p>Redirecting to login...</p>
-    <div class="spinner"></div>
-    <p><a href="login.html" style="color: #667eea; text-decoration: none; font-weight: 600;">Click here if not redirected</a></p>
-  </div>
-  
-  <script>
-    // Redirect after 0.5 seconds
-    setTimeout(() => {
-      window.location.href = 'login.html';
-    }, 500);
-  </script>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <span>🎯</span>
+        <span>AI Interview Platform</span>
+      </div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="login.html" class="btn-login">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <h1>Ace Your Next <span class="highlight">Interview</span></h1>
+      <p>Practice with AI-powered mock interviews, get instant feedback, and track your progress to land your dream job</p>
+      <div class="hero-buttons">
+        <a href="login.html" class="btn-primary">
+          <span>Start Practicing Free</span>
+          <span>→</span>
+        </a>
+        <a href="#features" class="btn-secondary">
+          <span>Learn More</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="features-container">
+      <h2 class="section-title">Powerful Features to Help You Succeed</h2>
+      <p class="section-subtitle">Everything you need to prepare for technical interviews and land your dream role</p>
+      
+      <div class="features-grid">
+        
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>AI-Powered Evaluation</h3>
+          <p>Advanced NLP algorithms analyze your answers for relevance, clarity, completeness, and confidence with instant scoring</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Comprehensive Analytics</h3>
+          <p>Track your progress with interactive charts, identify strengths and weaknesses, and visualize improvement over time</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Role-Specific Practice</h3>
+          <p>Tailored questions for Software Engineers, Data Analysts, DevOps Engineers, and more with adjustable difficulty levels</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Instant Feedback</h3>
+          <p>Get real-time feedback on every answer with detailed breakdowns and actionable recommendations for improvement</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Progress Tracking</h3>
+          <p>Monitor your complete interview history, scores by role and difficulty, and watch your skills grow over time</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📥</div>
+          <h3>Performance Reports</h3>
+          <p>Download detailed performance reports in multiple formats to track your journey or share with mentors and recruiters</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="features-container">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Get started in 4 simple steps</p>
+      
+      <div class="steps">
+        
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Create Account</h3>
+          <p>Sign up for free in seconds with just your email</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Select Your Role</h3>
+          <p>Choose your target position and difficulty level</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Practice & Learn</h3>
+          <p>Answer questions and receive AI-powered feedback</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Track Progress</h3>
+          <p>Review analytics and continuously improve</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stats-container">
+      
+      <div class="stat-item">
+        <h2>8+</h2>
+        <p>Job Roles Covered</p>
+      </div>
+
+      <div class="stat-item">
+        <h2>AI</h2>
+        <p>Powered Evaluation</p>
+      </div>
+
+      <div class="stat-item">
+        <h2>100%</h2>
+        <p>Free Platform</p>
+      </div>
+
+      <div class="stat-item">
+        <h2>24/7</h2>
+        <p>Always Available</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-container">
+      <h2>Ready to Ace Your Interview?</h2>
+      <p>Join candidates worldwide preparing for their dream jobs with AI-powered practice</p>
+      <a href="login.html" class="btn-primary">Start Your Journey Today →</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="https://github.com/Moharganguly/AI-Interview-Platform" target="_blank">GitHub</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="login.html">Login</a>
+      </div>
+      <p>&copy; 2026 AI Interview Platform. Built with ❤️ by Mohar Ganguly</p>
+    </div>
+  </footer>
+
 </body>
 </html>
