@@ -49,7 +49,14 @@ nav {
   background-clip: text;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+}
+
+.logo svg {
+  width: 32px;
+  height: 32px;
+  fill: url(#gradient);
+  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.5));
 }
 
 .nav-links {

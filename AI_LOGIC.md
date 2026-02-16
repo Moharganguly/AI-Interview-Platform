@@ -2,7 +2,7 @@
 
 ## Overview
 
-Our AI Interview Platform uses Natural Language Processing (NLP) to evaluate candidate responses in real-time, providing comprehensive feedback across multiple dimensions.
+Our AI Interview Preparation Platform uses Natural Language Processing (NLP) to evaluate candidate responses in real-time, providing comprehensive feedback across multiple dimensions.
 
 ## Evaluation Architecture
 

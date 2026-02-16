@@ -2,7 +2,7 @@
 
 ## Overview
 
-The AI Interview Platform uses **MongoDB Atlas** as its primary database, leveraging a NoSQL document-based approach for flexibility and scalability.
+The AI Interview Preparation Platform uses **MongoDB Atlas** as its primary database, leveraging a NoSQL document-based approach for flexibility and scalability.
 
 **Database Name:** `ai-interview-platform`
 
